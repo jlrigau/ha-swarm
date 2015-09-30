@@ -12,7 +12,7 @@ sed -i 's/<node_ip>/10.0.10.xx/g' primary.yml
 ## Start Consul
 
 ```
-docker-compose -f primary.yml up -d consul
+docker-compose up -d consul
 ```
 
 ### Check Consul information
@@ -24,11 +24,11 @@ curl -v 10.0.10.24:8500/v1/kv/swarm?recurse
 ## Run Swarm Agent
 
 ```
-docker-compose -f primary.yml up -d swarm
+docker-compose up -d swarm
 ```
 
 ## Run Swarm Agent
 
 ```
-docker-compose -f primary.yml up -d swarm
+docker-compose up -d swarm
 ```
