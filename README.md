@@ -59,5 +59,5 @@ curl [CONSUL_IP]:8500/v1/kv/nodes?recurse | jq '.'
 ## Check Cluster information
 
 ```
-DOCKER_HOST=[NODE_IP]:4000 docker info
+DOCKER_HOST=$(curl -s [CONSUL_IP]:8500/v1/kv/nodes/docker/swarm/leader?raw) docker info
 ```
