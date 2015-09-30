@@ -23,7 +23,8 @@ swarm-manager:
   image: swarm
   container_name: swarm-manager
   labels:
-  - "SERVICE_NAME=swarm-manager"
+  - "SERVICE_4000_NAME=swarm-manager"
+  - "SERVICE_4000_CHECK_HTTP=http://$SERVICE_IP:4000"
   command: manage -H :4000 --replication --advertise <node_ip>:4000 consul://<consul_ip>:8500/nodes
   ports:
     - "4000:4000"
