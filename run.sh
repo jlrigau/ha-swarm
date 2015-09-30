@@ -8,4 +8,4 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 sed -i 's/{{" $1 "}}/" $2 "/g' primary.yml
 
-docker-compose -
+docker-compose -f primary.yml up -d
