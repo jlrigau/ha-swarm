@@ -1,6 +1,6 @@
 # High availability in Docker Swarm
 
-![HA Swarm](ha-swarm)
+![HA Swarm](ha-swarm.png)
 
 ## Install Docker compose
 
