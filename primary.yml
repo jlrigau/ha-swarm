@@ -1,0 +1,10 @@
+consul:
+  image: progrium/consul
+  ports:
+    - "8400:8400"
+    - "8500:8500"
+    - "8600:53/udp"
+  command: -server -bootstrap
+swarm:
+  image: swarm
+  command: join --advertise=<node_ip:2375>
