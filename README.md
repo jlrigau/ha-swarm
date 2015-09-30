@@ -20,26 +20,23 @@ sed -i 's/<consul_ip>/[CONSUL_IP]/g' docker-compose.yml
 sed -i 's/<node_ip>/[NODE_IP]/g' docker-compose.yml
 ```
 
-## Start Consul
+## On first node
 
 ```
 docker-compose up -d consul
+docker-compose up -d swarm-agent
+docker-compose up -d swarm-manager
 ```
 
-### Check Consul information
+## On other nodes
+
+```
+docker-compose up -d swarm-agent
+docker-compose up -d swarm-manager
+```
+
+## Check Consul information
 
 ```
 curl -v [CONSUL_IP]:8500/v1/kv/swarm?recurse
-```
-
-## Run Swarm Agent
-
-```
-docker-compose up -d swarm
-```
-
-## Run Swarm Agent
-
-```
-docker-compose up -d swarm
 ```
