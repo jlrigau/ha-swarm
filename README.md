@@ -20,11 +20,13 @@ sed -i 's/<node_ip>/[NODE_IP]/g' docker-compose.yml
 
 ## Configure Docker engine
 
-Open and edit ```/etc/default/docker``` file and configure Docker engine to listen on ```0.0.0.0```
+Open and edit ```/etc/default/docker``` file
 
 ```
 sudo vi /etc/default/docker
 ```
+
+Configure Docker engine to listen on ```0.0.0.0```
 
 ```
 DOCKER_OPTS="-H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375"
