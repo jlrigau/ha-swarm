@@ -1,0 +1,24 @@
+
+
+haproxy:
+  image: haproxy
+  container_name: haproxy
+  entrypoint: /entrypoint.sh
+  volumes:
+    - ./entrypoint.sh:/entrypoint.sh
+    - ./haproxy.cfg.default:/haproxy.cfg.default
+    - /usr/local/etc/haproxy/
+  ports:
+    - 80:80
+    - 2375:2375
+
+consultemplate:
+  command: consul-template -consul demo.consul.io -template "/haproxy.cfg.ctmpl:/usr/local/etc/haproxy/haproxy.cfg:/usr/bin/docker exec haproxy /usr/sbin/haproxy -f /usr/local/etc/haproxy/haproxy.cfg -sf"
+  image: c12e/consul-template:0.10.0
+  volumes_from:
+    - haproxy
+  volumes:
+    - /usr/bin/docker:/usr/bin/docker
+    - /var/run/docker.sock:/var/run/docker.sock
+    - ./haproxy.cfg.ctmpl:/haproxy.cfg.ctmpl
+
