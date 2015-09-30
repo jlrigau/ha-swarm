@@ -18,6 +18,24 @@ sed -i 's/<consul_ip>/[CONSUL_IP]/g' docker-compose.yml
 sed -i 's/<node_ip>/[NODE_IP]/g' docker-compose.yml
 ```
 
+## Configure Docker engine
+
+Open and edit ```/etc/default/docker``` file and configure Docker engine to listen on ```0.0.0.0```
+
+```
+sudo vi /etc/default/docker
+```
+
+```
+DOCKER_OPTS="-H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375"
+```
+
+Then restart Docker engine
+
+```
+sudo service docker restart
+```
+
 ## On Consul node
 
 ```
