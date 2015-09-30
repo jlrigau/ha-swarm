@@ -2,6 +2,8 @@
 
 High availability in Docker Swarm
 
+![Swarm multimaster](Swarm multimaster.png)
+
 ## Replace node IP
 
 ```
