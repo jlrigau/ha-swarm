@@ -7,7 +7,7 @@ consul:
   command: -server -bootstrap
 swarm-agent:
   image: swarm
-  command: join --advertise=<node_ip>:2375 consul://<node_ip>:8500/swarm
+  command: join --advertise=<node_ip>:2375 consul://<node_ip>:8500/nodes
 swarm-manager:
   image: swarm
-  command: manage -H :4000 consul://<node_ip>:8500/swarm
+  command: manage -H :4000 --replication --advertise <node_ip>:4000 consul://<node_ip>:8500/nodes
