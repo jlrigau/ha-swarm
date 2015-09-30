@@ -1,23 +1,26 @@
 consul:
   image: progrium/consul
+  container_name: consul
   ports:
     - "8400:8400"
     - "8500:8500"
     - "8600:53/udp"
   command: -server -bootstrap
-swarm-agent:
-  image: swarm
-  command: join --advertise=<node_ip>:2375 consul://<consul_ip>:8500/nodes
-swarm-manager:
-  image: swarm
-  command: manage -H :4000 --replication --advertise <node_ip>:4000 consul://<consul_ip>:8500/nodes
-  ports:
-    - "4000:4000"
 registrator:
-  image: gliderlabs/registrator:latest
+  image: gliderlabs/registrator
   container_name: registrator
   restart: always
   net: host
   volumes:
-  - /var/run/docker.sock:/tmp/docker.sock
+    - /var/run/docker.sock:/tmp/docker.sock
   command: consul://<consul_ip>:8500
+swarm-agent:
+  image: swarm
+  container_name: swarm-agent
+  command: join --advertise=<node_ip>:2375 consul://<consul_ip>:8500/nodes
+swarm-manager:
+  image: swarm
+  container_name: swarm-manager
+  command: manage -H :4000 --replication --advertise <node_ip>:4000 consul://<consul_ip>:8500/nodes
+  ports:
+    - "4000:4000"
