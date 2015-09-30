@@ -7,4 +7,4 @@ consul:
   command: -server -bootstrap
 swarm:
   image: swarm
-  command: join --advertise=<node_ip>:2375 consul://<node_ip>/swarm
+  command: join --advertise=<node_ip>:2375 consul://<node_ip>:8500/swarm
