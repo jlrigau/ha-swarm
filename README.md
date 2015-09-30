@@ -11,30 +11,27 @@ curl -L https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERS
 chmod +x /usr/local/bin/docker-compose
 ```
 
-## Replace node IP
+## Replace Consul and node IPs
 
 ```
 sed -i 's/<consul_ip>/[CONSUL_IP]/g' docker-compose.yml
 sed -i 's/<node_ip>/[NODE_IP]/g' docker-compose.yml
 ```
 
-## On first node
+## On Consul node
 
 ```
 docker-compose up -d consul
-docker-compose up -d swarm-agent
-docker-compose up -d swarm-manager
 ```
 
-## On other nodes
+## On each node
 
 ```
-docker-compose up -d swarm-agent
-docker-compose up -d swarm-manager
+docker-compose up -d swarm-agent swarm-manager
 ```
 
 ## Check Consul information
 
 ```
-curl -v [CONSUL_IP]:8500/v1/kv/swarm?recurse
+curl [CONSUL_IP]:8500/v1/kv/nodes?recurse | jq '.'
 ```
