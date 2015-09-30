@@ -12,4 +12,4 @@ swarm-manager:
   image: swarm
   command: manage -H :4000 --replication --advertise <node_ip>:4000 consul://<consul_ip>:8500/nodes
   ports:
-    - "4000:2375"
+    - "4000:4000"
