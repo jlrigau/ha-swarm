@@ -5,6 +5,9 @@ consul:
     - "8500:8500"
     - "8600:53/udp"
   command: -server -bootstrap
-swarm:
+swarm-agent:
   image: swarm
   command: join --advertise=<node_ip>:2375 consul://<node_ip>:8500/swarm
+swarm-manager:
+  image: swarm
+  command: manage -H :4000 consul://<node_ip>:8500/swarm
