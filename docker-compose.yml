@@ -11,3 +11,11 @@ swarm-agent:
 swarm-manager:
   image: swarm
   command: manage -H :4000 --replication --advertise <node_ip>:4000 consul://<consul_ip>:8500/nodes
+registrator:
+  image: gliderlabs/registrator:latest
+  container_name: registrator
+  restart: always
+  net: host
+  volumes:
+  - /var/run/docker.sock:/tmp/docker.sock
+  command: consul://<consul_ip>:8500
