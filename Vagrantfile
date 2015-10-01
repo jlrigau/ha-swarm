@@ -21,6 +21,11 @@ Vagrant.configure(2) do |config|
         echo 'DOCKER_OPTS="-H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375"' >> /etc/default/docker
 
         service docker restart
+
+        cp /vagrant/docker-compose.yml /home/vagrant/docker-compose.yml
+
+        sed -i 's/<consul_ip>/192.168.33.100/g' docker-compose.yml
+        sed -i 's/<node_ip>/192.168.33.10#{number}/g' docker-compose.yml
       SHELL
 
       node.vm.network "private_network", ip: "192.168.33.10#{number}"
