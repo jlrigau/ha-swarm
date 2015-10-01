@@ -15,6 +15,13 @@ registrator:
   volumes:
     - /var/run/docker.sock:/tmp/docker.sock
   command: consul://<consul_ip>:8500
+interlock:
+  image: ehazlett/interlock
+  container_name: interlock
+  restart: always
+  command: --swarm-url tcp://<node_ip>:4000 --plugin haproxy start
+  ports:
+    - "80:80"
 swarm-agent:
   image: swarm
   container_name: swarm-agent
